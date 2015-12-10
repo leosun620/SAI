@@ -63,14 +63,14 @@
 /**
  *
  * Defined API sets have assigned ID's. If specific api method table changes
- * in any way (method signature, number of methods), a new ID needs to be 
- * created (e.g. VLAN2) and old API still may need to be supported for 
+ * in any way (method signature, number of methods), a new ID needs to be
+ * created (e.g. VLAN2) and old API still may need to be supported for
  * compatibility with older adapter hosts.
  *
  */
 typedef enum _sai_api_t
-{    
-    SAI_API_UNSPECIFIED      =  0, 
+{
+    SAI_API_UNSPECIFIED      =  0,
     SAI_API_SWITCH           =  1,  /**< sai_switch_api_t */
     SAI_API_PORT             =  2,  /**< sai_port_api_t */
     SAI_API_FDB              =  3,  /**< sai_fdb_api_t */
@@ -96,6 +96,7 @@ typedef enum _sai_api_t
     SAI_API_BUFFERS          = 23,  /**< sai_buffer_api_t */
     SAI_API_HASH             = 24,  /**< sai_hash_api_t */
     SAI_API_UDF              = 25,  /**< sai_udf_api_t */
+    SAI_API_IPMC             = 26,  /**< sai_ipmc_api_t */
 } sai_api_t;
 
 typedef enum _sai_log_level_t

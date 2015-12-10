@@ -86,6 +86,12 @@ typedef enum _sai_router_interface_attr_t
     /** Admin V6 state [bool] (CREATE_AND_SET) (default to TRUE) */
     SAI_ROUTER_INTERFACE_ATTR_ADMIN_V6_STATE,
 
+    /** Admin V4 multicast state [bool] (CREATE_AND_SET) (default to FALSE) */
+    SAI_ROUTER_INTERFACE_ATTR_ADMIN_V4_MULTICAST_STATE,
+
+    /** Admin V6 multicast state [bool] (CREATE_AND_SET) (default to FALSE) */
+    SAI_ROUTER_INTERFACE_ATTR_ADMIN_V6_MULTICAST_STATE,
+
     /** MTU [uint32_t] (CREATE_AND_SET) (default to 1514 bytes) */
     SAI_ROUTER_INTERFACE_ATTR_MTU,
 
