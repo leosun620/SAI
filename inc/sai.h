@@ -41,6 +41,7 @@
 #include <sainexthop.h>
 #include <sainexthopgroup.h>
 #include <sairoute.h>
+#include <saiipmc.h>
 #include <saiacl.h>
 #include <saihostintf.h>
 #include <saimirror.h>

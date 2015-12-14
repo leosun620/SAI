@@ -1,3 +1,8 @@
+#if !defined(__SAIIPMC_H_)
+#define __SAIIPMC_H_
+
+#include <saitypes.h>
+
 /**
  *  IP multicast entry key
  */
@@ -127,3 +132,4 @@ typedef struct _sai_ipmc_api_t
     sai_get_ipmc_entry_attribute_fn       get_ipmc_entry_attribute;
 } sai_ipmc_api_t;
 
+#endif // __SAIIPMC_H_
