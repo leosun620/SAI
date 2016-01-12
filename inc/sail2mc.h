@@ -9,6 +9,7 @@
 typedef struct _sai_l2mc_entry_t
 {
     sai_vlan_id_t vlan_id;
+    sai_ip_address_t source;
     sai_ip_address_t group;
 } sai_l2mc_entry_t;
 
