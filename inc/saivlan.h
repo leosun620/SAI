@@ -93,6 +93,12 @@ typedef enum _sai_vlan_attr_t
       */
     SAI_VLAN_ATTR_LEARN_DISABLE,
 
+    /** IGMP snooping state [bool] (CREATE_AND_SET) (defaults to TRUE) */
+    SAI_VLAN_ATTR_IGMP_SNOOPING_ENABLE,
+
+    /** MLD snooping state [bool] (CREATE_AND_SET) (defaults to TRUE) */
+    SAI_VLAN_ATTR_MLD_SNOOPING_ENABLE,
+
     /** User based Meta Data
       * [sai_uint32_t] (CREATE_AND_SET)
       * Value Range SAI_SWITCH_ATTR_VLAN_USER_META_DATA_RANGE */
