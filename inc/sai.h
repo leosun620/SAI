@@ -42,6 +42,7 @@
 #include <sainexthopgroup.h>
 #include <sairoute.h>
 #include <saiipmc.h>
+#include <sail2mc.h>
 #include <saiacl.h>
 #include <saihostintf.h>
 #include <saimirror.h>
@@ -98,6 +99,8 @@ typedef enum _sai_api_t
     SAI_API_HASH             = 24,  /**< sai_hash_api_t */
     SAI_API_UDF              = 25,  /**< sai_udf_api_t */
     SAI_API_IPMC             = 26,  /**< sai_ipmc_api_t */
+    SAI_API_L2MC             = 27,  /**< sai_l2mc_api_t */
+    SAI_API_MAX,
 } sai_api_t;
 
 typedef enum _sai_log_level_t
