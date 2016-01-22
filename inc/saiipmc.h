@@ -30,13 +30,11 @@ typedef enum _sai_ipmc_entry_attr_t
      * (default to 0) */
     SAI_IPMC_ATTR_TRAP_PRIORITY,
 
-    /** RPF router interface list [sai_object_id_t] */
-    SAI_IPMC_ATTR_RPF_ROUTER_INTERFACE_LIST,
+    /** Output router interface list [sai_object_list_t] */
+    SAI_IPMC_ATTR_OUTPUT_ROUTER_INTERFACE_LIST,
 
-    /** Next hop group id for the packet [sai_object_id_t]
-     * The next hop id should be next hop group.
-     * The next hop id type should be SAI_NEXT_HOP_GROUP_IPMC */
-    SAI_IPMC_ATTR_NEXT_HOP_GROUP_ID,
+    /** RPF router interface list [sai_object_list_t] */
+    SAI_IPMC_ATTR_RPF_ROUTER_INTERFACE_LIST,
 
     /** Custom range base value */
     SAI_IPMC_ATTR_CUSTOM_RANGE_BASE  = 0x10000000

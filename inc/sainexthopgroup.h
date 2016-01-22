@@ -45,9 +45,6 @@ typedef enum _sai_next_hop_group_type_t
     /** Next hop group is ECMP */
     SAI_NEXT_HOP_GROUP_ECMP,
 
-    /** Next hop group is IP multicast */
-    SAI_NEXT_HOP_GROUP_IPMC,
-
     /** Other types of next hop group to be defined in the future, e.g., WCMP */
 
 } sai_next_hop_group_type_t;

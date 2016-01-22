@@ -44,8 +44,6 @@ typedef enum _sai_next_hop_type_t
 {
     SAI_NEXT_HOP_IP,
 
-    SAI_NEXT_HOP_ROUTER_INTERFACE,
-
     /** 
     Tunneling to be added later
     */
