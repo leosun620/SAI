@@ -111,6 +111,8 @@ typedef enum _sai_acl_ip_frag_t
 
 } sai_acl_ip_frag_t;
 
+#define SAI_ACL_USER_DEFINED_FIELD_ATTR_ID_RANGE 0xFF
+
 /**
  *  @brief Attribute Id for sai_acl_table
  */
@@ -225,6 +227,9 @@ typedef enum _sai_acl_table_attr_t
     /** Out-Port */
     SAI_ACL_TABLE_ATTR_FIELD_OUT_PORT,
 
+    /** Source Port */
+    SAI_ACL_TABLE_ATTR_FIELD_SRC_PORT,
+
     /** Outer Vlan-Id */
     SAI_ACL_TABLE_ATTR_FIELD_OUTER_VLAN_ID,
 
@@ -291,6 +296,9 @@ typedef enum _sai_acl_table_attr_t
     /** ICMP Code */
     SAI_ACL_TABLE_ATTR_FIELD_ICMP_CODE,
 
+    /** Vlan Tags */
+    SAI_ACL_TABLE_ATTR_FIELD_VLAN_TAGS,
+
     /** User Based Meta Data [bool] */
 
     /** FDB DST user meta data */
@@ -319,8 +327,14 @@ typedef enum _sai_acl_table_attr_t
     /** DST IP address match in neighbor table */
     SAI_ACL_TABLE_ATTR_FIELD_NEIGHBOR_DST_NPU_META_HIT,
 
+    /** User Defined Field Groups [sai_object_id_t]
+     * (CREATE_ONLY, default to SAI_NULL_OBJECT_ID) */
+    SAI_ACL_TABLE_ATTR_USER_DEFINED_FIELD_GROUP_MIN,
+
+    SAI_ACL_TABLE_ATTR_USER_DEFINED_FIELD_GROUP_MAX = SAI_ACL_TABLE_ATTR_USER_DEFINED_FIELD_GROUP_MIN + SAI_ACL_USER_DEFINED_FIELD_ATTR_ID_RANGE,
+
     /** End of Table Match Field */
-    SAI_ACL_TABLE_ATTR_FIELD_END = SAI_ACL_TABLE_ATTR_FIELD_NEIGHBOR_DST_NPU_META_HIT,
+    SAI_ACL_TABLE_ATTR_FIELD_END = SAI_ACL_TABLE_ATTR_USER_DEFINED_FIELD_GROUP_MAX,
 
     /* -- */
 
@@ -393,6 +407,10 @@ typedef enum _sai_acl_entry_attr_t
     /** Out-Port [sai_object_id_t] (mask is not needed) */
     SAI_ACL_ENTRY_ATTR_FIELD_OUT_PORT,
 
+    /** Source port which could be a physical or lag port
+     *  [sai_object_id_t] (mask is not needed) */
+    SAI_ACL_ENTRY_ATTR_FIELD_SRC_PORT,
+
     /** Outer Vlan-Id [sai_uint16_t : 12] */
     SAI_ACL_ENTRY_ATTR_FIELD_OUTER_VLAN_ID,
 
@@ -459,6 +477,9 @@ typedef enum _sai_acl_entry_attr_t
     /** ICMP Code [sai_uint8_t] */
     SAI_ACL_ENTRY_ATTR_FIELD_ICMP_CODE,
 
+    /** Number of VLAN Tags [sai_packet_vlan_t] */
+    SAI_ACL_ENTRY_ATTR_FIELD_VLAN_TAGS,
+
     /** User Based Meta Data [sai_uint32_t] */
 
     /** DST MAC address match user meta data in FDB
@@ -501,8 +522,14 @@ typedef enum _sai_acl_entry_attr_t
     /** DST IP address match in neighbor Table */
     SAI_ACL_ENTRY_ATTR_FIELD_NEIGHBOR_NPU_META_DST_HIT,
 
+    /** User Defined Field data for the UDF Groups in ACL Table.
+     * [sai_u8_list_t] */
+    SAI_ACL_ENTRY_ATTR_USER_DEFINED_FIELD_MIN,
+
+    SAI_ACL_ENTRY_ATTR_USER_DEFINED_FIELD_MAX = SAI_ACL_ENTRY_ATTR_USER_DEFINED_FIELD_MIN + SAI_ACL_USER_DEFINED_FIELD_ATTR_ID_RANGE,
+
     /** End of Rule Match Fields */
-    SAI_ACL_ENTRY_ATTR_FIELD_END = SAI_ACL_ENTRY_ATTR_FIELD_NEIGHBOR_NPU_META_DST_HIT,
+    SAI_ACL_ENTRY_ATTR_FIELD_END = SAI_ACL_ENTRY_ATTR_USER_DEFINED_FIELD_MAX,
 
     /** Actions [sai_acl_action_data_t]
      * - To enable an action, parameter is needed unless noted specifically.
@@ -514,6 +541,10 @@ typedef enum _sai_acl_entry_attr_t
     /** Redirect Packet to a destination which can be a port,
      * lag, nexthop, nexthopgroup. [sai_object_id_t] */
     SAI_ACL_ENTRY_ATTR_ACTION_REDIRECT = SAI_ACL_ENTRY_ATTR_ACTION_START,
+
+    /** Redirect Packet to a list of destination which can be
+     *  a port list. [sai_object_list_t] */
+    SAI_ACL_ENTRY_ATTR_ACTION_REDIRECT_LIST,
 
     /** Drop Packet [sai_packet_action_t] */
     SAI_ACL_ENTRY_ATTR_PACKET_ACTION,
@@ -601,8 +632,18 @@ typedef enum _sai_acl_entry_attr_t
      * Value Range SAI_SWITCH_ATTR_ACL_USER_META_DATA_RANGE */
     SAI_ACL_ENTRY_ATTR_ACTION_SET_ACL_META_DATA,
 
+    /** Egress block port list [sai_object_list_t]
+     * Packets matching the ACL entry and egressing out of the ports in the
+     * given port list will be dropped. */
+    SAI_ACL_ENTRY_ATTR_ACTION_EGRESS_BLOCK_PORT_LIST,
+
+    /** Set User Defined Trap ID [sai_uint32_t]
+     *  Copy packet action mandatory to be present (Copy/Trap/Log)
+     *  Value Range SAI_SWITCH_ATTR_ACL_USER_TRAP_ID_RANGE */
+    SAI_ACL_ENTRY_ATTR_ACTION_SET_USER_TRAP_ID,
+
     /** End of Rule Actions */
-    SAI_ACL_ENTRY_ATTR_ACTION_END = SAI_ACL_ENTRY_ATTR_ACTION_SET_ACL_META_DATA
+    SAI_ACL_ENTRY_ATTR_ACTION_END = SAI_ACL_ENTRY_ATTR_ACTION_SET_USER_TRAP_ID
 
 } sai_acl_entry_attr_t;
 
