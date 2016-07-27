@@ -55,6 +55,23 @@ typedef enum _sai_router_interface_type_t
 
 
 /**
+ *  @brief Attribute data for SAI_ROUTER_INTERFACE_URPF_MODE
+ */
+typedef enum _sai_urpf_mode_t
+{
+    /** None */
+    SAI_URPF_MODE_NONE,
+
+    /** Strict mode */
+    SAI_URPF_MODE_STRICT,
+
+    /** Loose mode */
+    SAI_URPF_MODE_LOOSE
+
+} sai_urpf_mode_t;
+
+
+/**
  *  @brief Routing interface attribute IDs 
  */
 typedef enum _sai_router_interface_attr_t
@@ -89,6 +106,18 @@ typedef enum _sai_router_interface_attr_t
 
     /** Admin V6 state [bool] (CREATE_AND_SET) (default to TRUE) */
     SAI_ROUTER_INTERFACE_ATTR_ADMIN_V6_STATE,
+
+    /** Admin V4 multicast state [bool] (CREATE_AND_SET) (default to FALSE) */
+    SAI_ROUTER_INTERFACE_ATTR_ADMIN_V4_MULTICAST_STATE,
+
+    /** Admin V6 multicast state [bool] (CREATE_AND_SET) (default to FALSE) */
+    SAI_ROUTER_INTERFACE_ATTR_ADMIN_V6_MULTICAST_STATE,
+
+    /** V4 Unicast RPF mode [sai_urpf_mode_t] (CREATE_AND_SET) (default to SAI_URPF_MODE_NONE) */
+    SAI_ROUTER_INTERFACE_ATTR_V4_URPF_MODE,
+
+    /** V6 Unicast RPF mode [sai_urpf_mode_t] (CREATE_AND_SET) (default to SAI_URPF_MODE_NONE) */
+    SAI_ROUTER_INTERFACE_ATTR_V6_URPF_MODE,
 
     /** MTU [uint32_t] (CREATE_AND_SET) (default to 1514 bytes) */
     SAI_ROUTER_INTERFACE_ATTR_MTU,

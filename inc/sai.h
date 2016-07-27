@@ -29,34 +29,36 @@
 #if !defined (__SAI_H_)
 #define __SAI_H_
 
-#include "saitypes.h"
-#include "saistatus.h"
-#include "saiswitch.h"
-#include "saiport.h"
-#include "saivlan.h"
-#include "saifdb.h"
-#include "sairouter.h"
-#include "sairouterintf.h"
-#include "saineighbor.h"
-#include "sainexthop.h"
-#include "sainexthopgroup.h"
-#include "sairoute.h"
-#include "saiacl.h"
-#include "saihostintf.h"
-#include "saimirror.h"
-#include "saistp.h"
-#include "saisamplepacket.h"
-#include "sailag.h"
-#include "saipolicer.h"
-#include "saiwred.h"
-#include "saiqosmaps.h"
-#include "saiqueue.h"
-#include "saischeduler.h"
-#include "saischedulergroup.h"
-#include "saibuffer.h"
-#include "saihash.h"
-#include "saiudf.h"
-#include "saitunnel.h"
+#include <saitypes.h>
+#include <saistatus.h>
+#include <saiswitch.h>
+#include <saiport.h>
+#include <saivlan.h>
+#include <saifdb.h>
+#include <sairouter.h>
+#include <sairouterintf.h>
+#include <saineighbor.h>
+#include <sainexthop.h>
+#include <sainexthopgroup.h>
+#include <sairoute.h>
+#include <saiipmc.h>
+#include <sail2mc.h>
+#include <saiacl.h>
+#include <saihostintf.h>
+#include <saimirror.h>
+#include <saistp.h>
+#include <saisamplepacket.h>
+#include <sailag.h>
+#include <saipolicer.h>
+#include <saiwred.h>
+#include <saiqosmaps.h>
+#include <saiqueue.h>
+#include <saischeduler.h>
+#include <saischedulergroup.h>
+#include <saibuffer.h>
+#include <saihash.h>
+#include <saiudf.h>
+#include <saitunnel.h>
 
 /** \defgroup SAI SAI - Entry point specific API definitions.
  *
@@ -66,14 +68,14 @@
 /**
  *
  * Defined API sets have assigned ID's. If specific api method table changes
- * in any way (method signature, number of methods), a new ID needs to be 
- * created (e.g. VLAN2) and old API still may need to be supported for 
+ * in any way (method signature, number of methods), a new ID needs to be
+ * created (e.g. VLAN2) and old API still may need to be supported for
  * compatibility with older adapter hosts.
  *
  */
 typedef enum _sai_api_t
-{    
-    SAI_API_UNSPECIFIED      =  0, 
+{
+    SAI_API_UNSPECIFIED      =  0,
     SAI_API_SWITCH           =  1,  /**< sai_switch_api_t */
     SAI_API_PORT             =  2,  /**< sai_port_api_t */
     SAI_API_FDB              =  3,  /**< sai_fdb_api_t */
@@ -100,6 +102,9 @@ typedef enum _sai_api_t
     SAI_API_HASH             = 24,  /**< sai_hash_api_t */
     SAI_API_UDF              = 25,  /**< sai_udf_api_t */
     SAI_API_TUNNEL           = 26,  /**< sai_tunnel_api_t */
+    SAI_API_IPMC             = 27,  /**< sai_ipmc_api_t */
+    SAI_API_L2MC             = 28,  /**< sai_l2mc_api_t */
+    SAI_API_MAX,
 } sai_api_t;
 
 typedef enum _sai_log_level_t
