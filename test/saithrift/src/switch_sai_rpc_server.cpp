@@ -619,6 +619,36 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
       return;
   }
 
+  void sai_thrift_get_vlan_attribute(sai_thrift_attribute_list_t& thrift_attr_list, const sai_thrift_object_id_t vlan_id) {
+      printf("sai_thrift_get_vlan_attribute\n");
+      sai_status_t status = SAI_STATUS_SUCCESS;
+      sai_vlan_api_t *vlan_api;
+      sai_attribute_t vlan_member_list_object_attribute;
+      sai_thrift_attribute_t thrift_vlan_member_list_attribute;
+      sai_object_list_t *vlan_member_list_object;
+      status = sai_api_query(SAI_API_VLAN, (void **) &vlan_api);
+      if (status != SAI_STATUS_SUCCESS) {
+          return;
+      }
+
+      vlan_member_list_object_attribute.id = SAI_VLAN_ATTR_MEMBER_LIST;
+      vlan_member_list_object_attribute.value.objlist.list = (sai_object_id_t *) malloc(sizeof(sai_object_id_t) * 128);
+      vlan_member_list_object_attribute.value.objlist.count = 128;
+      vlan_api->get_vlan_attribute(vlan_id, 1, &vlan_member_list_object_attribute);
+
+      thrift_attr_list.attr_count = 1;
+      std::vector<sai_thrift_attribute_t>& attr_list = thrift_attr_list.attr_list;
+      thrift_vlan_member_list_attribute.id = SAI_VLAN_ATTR_MEMBER_LIST;
+      thrift_vlan_member_list_attribute.value.objlist.count = vlan_member_list_object_attribute.value.objlist.count;
+      std::vector<sai_thrift_object_id_t>& vlan_member_list = thrift_vlan_member_list_attribute.value.objlist.object_id_list;
+      vlan_member_list_object = &vlan_member_list_object_attribute.value.objlist;
+      for (int index = 0; index < vlan_member_list_object_attribute.value.objlist.count; index++) {
+          vlan_member_list.push_back((sai_thrift_object_id_t) vlan_member_list_object->list[index]);
+      }
+      attr_list.push_back(thrift_vlan_member_list_attribute);
+      free(vlan_member_list_object_attribute.value.objlist.list);
+  }
+  
   sai_thrift_object_id_t sai_thrift_create_vlan_member(const std::vector<sai_thrift_attribute_t> & thrift_attr_list) {
       printf("sai_thrift_create_vlan_member\n");
       sai_status_t status = SAI_STATUS_SUCCESS;
@@ -1102,7 +1132,8 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
           port_api->get_port_attribute(port_list_object_attribute.value.objlist.list[i], 1, &port_lane_list_attribute);
 
           std::set<int> port_lanes;
-          for (int j=0 ; j<4 ; j++){
+          uint32_t laneCnt = port_lane_list_attribute.value.u32list.count;
+          for (int j=0 ; j<laneCnt; j++){
               port_lanes.insert(port_lane_list_attribute.value.u32list.list[j]);
           }
           
@@ -1190,7 +1221,8 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
           port_api->get_port_attribute(port_list_object_attribute.value.objlist.list[i], 1, &port_lane_list_attribute);
 
           std::set<int> port_lanes;
-          for (int j=0 ; j<4 ; j++){
+          uint32_t laneCnt = port_lane_list_attribute.value.u32list.count;
+          for (int j=0 ; j<laneCnt; j++){
               port_lanes.insert(port_lane_list_attribute.value.u32list.list[j]);
           }
    
@@ -1296,6 +1328,12 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
           attribute = (sai_thrift_attribute_t)*it;
           attr_list[i].id = attribute.id;
           switch (attribute.id) {
+            case SAI_ACL_TABLE_ATTR_STAGE:
+                attr_list[i].value.u32 = attribute.value.u32;
+                break;
+            case SAI_ACL_TABLE_ATTR_PRIORITY:
+                attr_list[i].value.u32 = attribute.value.u32;
+                break;
             case SAI_ACL_TABLE_ATTR_FIELD_SRC_IPv6:
             case SAI_ACL_TABLE_ATTR_FIELD_DST_IPv6:
             case SAI_ACL_TABLE_ATTR_FIELD_SRC_MAC:
@@ -1326,8 +1364,9 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
             case SAI_ACL_TABLE_ATTR_FIELD_IP_FRAG:
             case SAI_ACL_TABLE_ATTR_FIELD_IPv6_FLOW_LABEL:
             case SAI_ACL_TABLE_ATTR_FIELD_TC:
+                attr_list[i].value.booldata = attribute.value.booldata;
                 break;
-              default:
+            default:
                 break;
           }
       }
@@ -1341,13 +1380,13 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
           attr_list[i].id = attribute.id;
           switch (attribute.id) {
             case SAI_ACL_ENTRY_ATTR_TABLE_ID:
-                attr_list[i].value.aclfield.data.oid = attribute.value.aclfield.data.oid;
+                attr_list[i].value.oid = attribute.value.oid;
                 break;
             case SAI_ACL_ENTRY_ATTR_PRIORITY:
-                attr_list[i].value.aclfield.data.u32 = attribute.value.aclfield.data.u32;
+                attr_list[i].value.u32 = attribute.value.u32;
                 break;
             case SAI_ACL_ENTRY_ATTR_ADMIN_STATE:
-                attr_list[i].value.aclfield.data.u8 = attribute.value.aclfield.data.u8;
+                attr_list[i].value.u8 = attribute.value.u8;
                 break;
             case SAI_ACL_ENTRY_ATTR_FIELD_SRC_IPv6:
             case SAI_ACL_ENTRY_ATTR_FIELD_DST_IPv6:
@@ -1980,6 +2019,17 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
       }
       attr_list.push_back(thrift_port_hw_lane);
       free(port_hw_lane.value.u32list.list); 
+	  
+      sai_attribute_t port_oper_status_attribute;
+      sai_thrift_attribute_t thrift_port_status;
+      port_oper_status_attribute.id = SAI_PORT_ATTR_OPER_STATUS;
+      port_api->get_port_attribute(port_id, 1, &port_oper_status_attribute);
+	  
+      thrift_attr_list.attr_count = 5;
+      thrift_port_status.id = SAI_PORT_ATTR_OPER_STATUS;
+      thrift_port_status.value.s32 =  port_oper_status_attribute.value.s32;
+      attr_list.push_back(thrift_port_status);
+	  
   }
 
   void sai_thrift_get_queue_stats(
@@ -2202,6 +2252,7 @@ class switch_sai_rpcHandler : virtual public switch_sai_rpcIf {
       sai_thrift_parse_wred_attributes(thrift_attr_list, attr_list);
       uint32_t attr_count = thrift_attr_list.size();
       wred_api->create_wred_profile(&wred_id, attr_count, attr_list);
+      free(attr_list);
       return wred_id;
   }
 
@@ -2291,9 +2342,11 @@ extern "C" {
 
 int start_sai_thrift_rpc_server(int port)
 {
+    static int param = port;
+
     std::cerr << "Starting SAI RPC server on port " << port << std::endl;
 
-    int rc = pthread_create(&switch_sai_thrift_rpc_thread, NULL, switch_sai_thrift_rpc_server_thread, &port);
+    int rc = pthread_create(&switch_sai_thrift_rpc_thread, NULL, switch_sai_thrift_rpc_server_thread, &param);
     std::cerr << "create pthread switch_sai_thrift_rpc_server_thread result " << rc << std::endl;
 
     rc = pthread_detach(switch_sai_thrift_rpc_thread);

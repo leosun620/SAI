@@ -46,8 +46,8 @@ sai_port_list = []
 front_port_list = []
 table_attr_list = []
 router_mac='00:77:66:55:44:00'
-rewrite_mac1='00:77:66:55:45:01'
-rewrite_mac2='00:77:66:55:46:01'
+rewrite_mac1='00:77:66:55:44:01'
+rewrite_mac2='00:77:66:55:44:02'
 
 is_bmv2 = ('BMV2_TEST' in os.environ) and (int(os.environ['BMV2_TEST']) == 1)
 
@@ -69,23 +69,36 @@ def switch_init(client):
                 sai_port_list.append(port_id)
         else:
             print "unknown switch attribute"
-
-    attr_value = sai_thrift_attribute_value_t(mac='00:77:66:55:44:33')
+    attr_value = sai_thrift_attribute_value_t(mac=router_mac)
     attr = sai_thrift_attribute_t(id=SAI_SWITCH_ATTR_SRC_MAC_ADDRESS, value=attr_value)
     client.sai_thrift_set_switch_attribute(attr)
-
-    # wait till the port are up
-    time.sleep(10)
+    all_ports_are_up = True
+    for num_of_tries in range(200):
+        time.sleep(1)
+        # wait till the port are up
+        for port in sai_port_list:
+            port_attr_list = client.sai_thrift_get_port_attribute(port)
+            attr_list = port_attr_list.attr_list
+            for attribute in attr_list:
+                if attribute.id == SAI_PORT_ATTR_OPER_STATUS:
+                    if attribute.value.s32 != SAI_PORT_OPER_STATUS_UP:
+                        all_ports_are_up = False
+                        print "port 0x%x is down" % port
+        if all_ports_are_up:
+            break
+        else:
+            all_ports_are_up = True
+    if not all_ports_are_up:
+        raise RuntimeError('Not all of the  ports are up')
 
     thrift_attr = client.sai_thrift_get_port_list_by_front_port()
     if thrift_attr.id == SAI_SWITCH_ATTR_PORT_LIST:
         for port_id in thrift_attr.value.objlist.object_id_list:
             front_port_list.append(port_id)
-
     for interface,front in interface_to_front_mapping.iteritems():
         sai_port_id = client.sai_thrift_get_port_id_by_front_port(front);
         port_list[int(interface)]=sai_port_id
-           
+        
     switch_inited = 1
 
 
@@ -128,7 +141,7 @@ def sai_thrift_create_virtual_router(client, v4_enabled, v6_enabled):
     #v6 enabled
     vr_attribute2_value = sai_thrift_attribute_value_t(booldata=v6_enabled)
     vr_attribute2 = sai_thrift_attribute_t(id=SAI_VIRTUAL_ROUTER_ATTR_ADMIN_V6_STATE,
-                                           value=vr_attribute1_value)
+                                           value=vr_attribute2_value)
     vr_attr_list = [vr_attribute1, vr_attribute2]
     vr_id = client.sai_thrift_create_virtual_router(thrift_attr_list=vr_attr_list)
     return vr_id
@@ -629,6 +642,7 @@ def sai_thrift_read_port_counters(client,port):
     port_cnt_ids.append(SAI_PORT_STAT_PFC_7_TX_PKTS)
     port_cnt_ids.append(SAI_PORT_STAT_IF_OUT_OCTETS)
     port_cnt_ids.append(SAI_PORT_STAT_IF_OUT_UCAST_PKTS)
+    port_cnt_ids.append(SAI_PORT_STAT_IF_IN_UCAST_PKTS)
     counters_results=[]
     counters_results = client.sai_thrift_get_port_stats(port,port_cnt_ids,len(port_cnt_ids))
     queue_list=[]
