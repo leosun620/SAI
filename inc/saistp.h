@@ -84,7 +84,7 @@ typedef enum _sai_stp_attr_t
      */
     SAI_STP_ATTR_END,
 
-} sai_stp_port_attr_t;
+} sai_stp_attr_t;
 
 /**
  * @brief SAI attributes for STP
