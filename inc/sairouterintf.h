@@ -65,7 +65,6 @@ typedef enum _sai_urpf_mode_t
 
 } sai_urpf_mode_t;
 
-
 /**
  * @brief Routing interface attribute IDs
  */
