@@ -87,16 +87,16 @@ typedef sai_status_t (*sai_create_telemetry_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_fn)(
-        _In_ sai_object_id_t *telemetry_obj);
+        _In_ sai_object_id_t telemetry_obj);
 
 typedef sai_status_t (*sai_get_telemetry_attribute_fn)(
         _In_    sai_object_id_t telemetry_obj,
         _In_    uint32_t attr_count,
-        _Inout_ const sai_attribute_t *attr_list);
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_attribute_fn)(
         _In_  sai_object_id_t telemetry_obj,
-        _In_  const sai_attribute_t *attr_list);
+        _In_  const sai_attribute_t *attr);
 
 typedef sai_status_t (*sai_create_telemetry_watchlist_entry_fn)(
         _Out_ sai_object_id_t *telemetry_watchlist_entry_id,
@@ -104,16 +104,16 @@ typedef sai_status_t (*sai_create_telemetry_watchlist_entry_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_watchlist_entry_fn)(
-        _In_ sai_object_id_t *telemetry_watchlist_entry_id);
+        _In_ sai_object_id_t telemetry_watchlist_entry_id);
 
 typedef sai_status_t (*sai_get_telemetry_watchlist_entry_attribute_fn)(
         _In_    sai_object_id_t telemetry_watchlist_entry_id,
         _In_    uint32_t attr_count,
-        _Inout_ const sai_attribute_t *attr_list);
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_watchlist_entry_attribute_fn)(
         _In_  sai_object_id_t telemetry_watchlist_entry_id,
-        _In_  const sai_attribute_t *attr_list);
+        _In_  const sai_attribute_t *attr);
 
 typedef sai_status_t (*sai_create_telemetry_queue_alert_fn)(
         _Out_ sai_object_id_t *telemetry_queue_alert_id,
@@ -121,16 +121,16 @@ typedef sai_status_t (*sai_create_telemetry_queue_alert_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_queue_alert_fn)(
-        _In_ sai_object_id_t * telemetry_queue_alert_id);
+        _In_ sai_object_id_t telemetry_queue_alert_id);
 
 typedef sai_status_t (*sai_get_telemetry_queue_alert_attribute_fn)(
         _In_    sai_object_id_t telemetry_queue_alert_id,
         _In_    uint32_t attr_count,
-        _Inout_ const sai_attribute_t *attr_list);
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_queue_alert_attribute_fn)(
         _In_  sai_object_id_t telemetry_queue_alert_id,
-        _In_  const sai_attribute_t *attr_list);
+        _In_  const sai_attribute_t *attr);
 
 typedef sai_status_t (*sai_create_telemetry_flow_alert_fn)(
         _Out_ sai_object_id_t *telemetry_flow_alert_id,
@@ -138,16 +138,16 @@ typedef sai_status_t (*sai_create_telemetry_flow_alert_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_flow_alert_fn)(
-        _In_ sai_object_id_t * telemetry_flow_alert_id);
+        _In_ sai_object_id_t telemetry_flow_alert_id);
 
 typedef sai_status_t (*sai_get_telemetry_flow_alert_attribute_fn)(
         _In_    sai_object_id_t telemetry_flow_alert_id,
         _In_    uint32_t attr_count,
-        _Inout_ const sai_attribute_t *attr_list);
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_flow_alert_attribute_fn)(
         _In_  sai_object_id_t telemetry_flow_alert_id,
-        _In_  const sai_attribute_t *attr_list);
+        _In_  const sai_attribute_t *attr);
 
 typedef sai_status_t (*sai_create_telemetry_int_session_fn)(
         _Out_ sai_object_id_t *telemetry_int_session_id,
@@ -155,16 +155,16 @@ typedef sai_status_t (*sai_create_telemetry_int_session_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_int_session_fn)(
-        _In_ sai_object_id_t *telemetry_int_session_id);
+        _In_ sai_object_id_t telemetry_int_session_id);
 
 typedef sai_status_t (*sai_get_telemetry_int_session_attribute_fn)(
         _In_    sai_object_id_t telemetry_int_session_id,
         _In_    uint32_t attr_count,
-        _Inout_ const sai_attribute_t *attr_list);
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_int_session_attribute_fn)(
         _In_  sai_object_id_t telemetry_int_session_id,
-        _In_  const sai_attribute_t *attr_list);
+        _In_  const sai_attribute_t *attr);
 
 typedef sai_status_t (*sai_create_telemetry_int_sink_port_fn)(
         _Out_ sai_object_id_t *telemetry_int_sink_port_id,
@@ -172,16 +172,16 @@ typedef sai_status_t (*sai_create_telemetry_int_sink_port_fn)(
         _In_  const sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_remove_telemetry_int_sink_port_fn)(
-        _In_ sai_object_id_t *telemetry_int_sink_port_id);
+        _In_ sai_object_id_t telemetry_int_sink_port_id);
 
 typedef sai_status_t (*sai_get_telemetry_int_sink_port_attribute_fn)(
-        _In_ sai_object_id_t telemetry_int_sink_port_id,
-        _In_  uint32_t attr_count,
-        _Out_  const sai_attribute_t *attr_list);
+        _In_    sai_object_id_t telemetry_int_sink_port_id,
+        _In_    uint32_t attr_count,
+        _Inout_ sai_attribute_t *attr_list);
 
 typedef sai_status_t (*sai_set_telemetry_int_sink_port_attribute_fn)(
         _In_ sai_object_id_t telemetry_int_sink_port_id,
-        _In_  const sai_attribute_t *attr_list);
+        _In_ const sai_attribute_t *attr);
 
 typedef struct _sai_telemetry_api_t {
     sai_create_telemetry_fn                       create_telemetry;
