@@ -1264,6 +1264,93 @@ typedef enum _sai_switch_attr_t
     /** Custom range base value */
     SAI_SWITCH_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
+    /**
+     * @brief INT endpoint
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default False
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_INT_EP_ENABLE,
+
+    /**
+     * @brief INT transit
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default False
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_INT_TRANSIT_ENABLE,
+
+    /**
+     * @brief Telemetry postcard
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default False
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_POSTCARD_ENABLE,
+
+    /**
+     * @brief Mirror on Drop
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default False
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_MIRROR_ON_DROP_ENABLE,
+
+    /**
+     * @brief Globally unique switch ID
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_SWITCH_ID,
+
+    /**
+     * @brief List of ERSPAN mirror sessions for sending telemetry reports
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_MIRROR_LIST,
+
+    /**
+     * @brief Telemetry flow state clear cycle
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @default 0
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_FLOW_STATE_CLEAR_CYCLE,
+
+    /**
+     * @brief Latency sensitivity for flow state change detection
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     * @default 15
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_LATENCY_SENSITIVITY,
+
+    /**
+     * @brief INT sink downstream ports
+     *
+     * @type sai_object_list_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_INT_SINK_PORT_LIST,
+
+    /**
+     * @brief Reserved DSCP value for INT over L4
+     *
+     * @type sai_dscp_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_SWITCH_ATTR_TELEMETRY_INT_DSCP,
+
     /** End of custom range base */
     SAI_SWITCH_ATTR_CUSTOM_RANGE_END
 

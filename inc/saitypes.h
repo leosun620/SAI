@@ -355,6 +355,11 @@ typedef struct _sai_acl_field_data_t
     } data;
 } sai_acl_field_data_t;
 
+typedef struct _sai_dscp_t {
+  sai_uint8_t value;
+  sai_uint8_t mask;
+} sai_dscp_t;
+
 /**
  * @brief Defines a single ACL action
  *
@@ -576,6 +581,7 @@ typedef union {
     sai_qos_map_list_t qosmap;
     sai_tunnel_map_list_t tunnelmap;
     sai_acl_capability_t aclcapability;
+    sai_dscp_t dscp;
 
 } sai_attribute_value_t;
 

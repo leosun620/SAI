@@ -4,39 +4,6 @@
 
 #include <saitypes.h>
 
-/**
- * @brief Telemetry feature types
- * INT_EP, INT_TRANSIT, POSTCARD are mutually exclusive
- * MOD can coexist with any one of the three above
- */
-typedef enum _sai_telemetry_type_t {
-    /** INT source and sink */
-    SAI_TELEMETRY_TYPE_INT_EP,
-    /** INT transit */
-    SAI_TELEMETRY_TYPE_INT_TRANSIT,
-    /** Postcard */
-    SAI_TELEMETRY_TYPE_POSTCARD,
-    /** Mirror on Drop */
-    SAI_TELEMETRY_TYPE_MOD,
-} sai_telemetry_type_t;
-
-/**
- * @brief Telemetry attributes
- */
-typedef enum _sai_telemetry_attr_t {
-    /** List of telemetry features to enable */
-    SAI_TELEMETRY_ATTR_TYPE_LIST,
-    /** Globally unique switch ID */
-    SAI_TELEMETRY_ATTR_SWITCH_ID,
-    /** List of ERSPAN mirror sessions for sending reports */
-    SAI_TELEMETRY_ATTR_MIRROR_LIST,
-
-    /** INT sink downstream ports */
-    SAI_TELEMETRY_ATTR_INT_SINK_PORT_LIST,
-    /** Reserved DSCP value for INT over L4 */
-    SAI_TELEMETRY_ATTR_INT_DSCP,
-} sai_telemetry_attr_t;
-
 /** Queue alert report trigger attributes */
 typedef enum _sai_telemetry_queue_alert_attr_t {
     /** egress port */
@@ -48,14 +15,6 @@ typedef enum _sai_telemetry_queue_alert_attr_t {
     /** queue latency threshold */
     SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_LATENCY_THRESHOLD,
 } sai_telemetry_queue_alert_attr_t;
-
-/** Flow alert report trigger attributes */
-typedef enum _sai_telemetry_flow_alert_attr_t {
-    /** Flow state clear cycle */
-    SAI_TELEMETRY_FLOW_ALERT_ATTR_FLOW_STATE_CLEAR_CYCLE,
-    /** Latency sensitivity for flow state change detection */
-    SAI_TELEMETRY_FLOW_ALERT_ATTR_LATENCY_SENSITIVITY,
-} sai_telemetry_flow_alert_attr_t;
 
 /** INT instructions */
 typedef enum _sai_telemetry_int_instruction_t {
@@ -132,23 +91,6 @@ typedef sai_status_t (*sai_set_telemetry_queue_alert_attribute_fn)(
         _In_  sai_object_id_t telemetry_queue_alert_id,
         _In_  const sai_attribute_t *attr);
 
-typedef sai_status_t (*sai_create_telemetry_flow_alert_fn)(
-        _Out_ sai_object_id_t *telemetry_flow_alert_id,
-        _In_  uint32_t attr_count,
-        _In_  const sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_remove_telemetry_flow_alert_fn)(
-        _In_ sai_object_id_t telemetry_flow_alert_id);
-
-typedef sai_status_t (*sai_get_telemetry_flow_alert_attribute_fn)(
-        _In_    sai_object_id_t telemetry_flow_alert_id,
-        _In_    uint32_t attr_count,
-        _Inout_ sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_set_telemetry_flow_alert_attribute_fn)(
-        _In_  sai_object_id_t telemetry_flow_alert_id,
-        _In_  const sai_attribute_t *attr);
-
 typedef sai_status_t (*sai_create_telemetry_int_session_fn)(
         _Out_ sai_object_id_t *telemetry_int_session_id,
         _In_  uint32_t attr_count,
@@ -184,20 +126,10 @@ typedef sai_status_t (*sai_set_telemetry_int_sink_port_attribute_fn)(
         _In_ const sai_attribute_t *attr);
 
 typedef struct _sai_telemetry_api_t {
-    sai_create_telemetry_fn                       create_telemetry;
-    sai_remove_telemetry_fn                       remove_telemetry;
-    sai_get_telemetry_attribute_fn                get_telemetry_attribute;
-    sai_set_telemetry_attribute_fn                set_telemetry_attribute;
-
     sai_create_telemetry_queue_alert_fn           create_telemetry_queue_alert;
     sai_remove_telemetry_queue_alert_fn           remove_telemetry_queue_alert;
     sai_get_telemetry_queue_alert_attribute_fn    get_telemetry_queue_alert_attribute;
     sai_set_telemetry_queue_alert_attribute_fn    set_telemetry_queue_alert_attribute;
-
-    sai_create_telemetry_flow_alert_fn            create_telemetry_flow_alert;
-    sai_remove_telemetry_flow_alert_fn            remove_telemetry_flow_alert;
-    sai_get_telemetry_flow_alert_attribute_fn     get_telemetry_flow_alert_attribute;
-    sai_set_telemetry_flow_alert_attribute_fn     set_telemetry_flow_alert_attribute;
 
     sai_create_telemetry_int_session_fn           create_telemetry_int_session;
     sai_remove_telemetry_int_session_fn           remove_telemetry_int_session;
