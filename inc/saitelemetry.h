@@ -16,28 +16,22 @@ typedef enum _sai_telemetry_queue_alert_attr_t {
     SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_LATENCY_THRESHOLD,
 } sai_telemetry_queue_alert_attr_t;
 
-/** INT instructions */
-typedef enum _sai_telemetry_int_instruction_t {
-    /** Switch ID */
-    SAI_TELEMETRY_INT_INST_SWITCH_ID,
-    /** Ingress and egress ports */
-    SAI_TELEMETRY_INT_INST_SWITCH_PORTS,
-    /** Timestamp at ingress */
-    SAI_TELEMETRY_INT_INST_INGRESS_TIMESTAMP,
-    /** Timestamp at egress */
-    SAI_TELEMETRY_INT_INST_EGRESS_TIMESTAMP,
-    /** Queue ID and queue depth */
-    SAI_TELEMETRY_INT_INST_QUEUE_INFO,
-} sai_telemetry_int_instruction_t;
-
 /** INT config session for endpoint switch */
 typedef enum _sai_telemetry_int_session_attr_t {
-    /** INT config session ID */
+    /** INT config session ID (sai_uint16_t) */
     SAI_TELEMETRY_INT_SESSION_ATTR_SESSION_ID,
-    /** INT max hop count */
+    /** INT max hop count (sai_uint8_t) */
     SAI_TELEMETRY_INT_SESSION_ATTR_MAX_HOP_COUNT,
-    /** INT instruction list*/
-    SAI_TELEMETRY_INT_SESSION_ATTR_INT_INST_LIST,
+    /** Enable Switch ID in INT instruction (default: false) */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_SWITCH_ID,
+    /** Enable Ingress and egress ports in INT instruction (default: false) */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_SWITCH_PORTS,
+    /** Enable Timestamp at ingress in INT instruction (default: false) */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_INGRESS_TIMESTAMP,
+    /** Enable Timestamp at egress in INT instruction (default: false) */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_EGRESS_TIMESTAMP,
+    /** Enable Queue ID and queue depth in INT instruction (default: false) */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_QUEUE_INFO,
 } sai_telemetry_int_session_attr_t;
 
 typedef sai_status_t (*sai_create_telemetry_fn)(
@@ -108,23 +102,6 @@ typedef sai_status_t (*sai_set_telemetry_int_session_attribute_fn)(
         _In_  sai_object_id_t telemetry_int_session_id,
         _In_  const sai_attribute_t *attr);
 
-typedef sai_status_t (*sai_create_telemetry_int_sink_port_fn)(
-        _Out_ sai_object_id_t *telemetry_int_sink_port_id,
-        _In_  uint32_t attr_count,
-        _In_  const sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_remove_telemetry_int_sink_port_fn)(
-        _In_ sai_object_id_t telemetry_int_sink_port_id);
-
-typedef sai_status_t (*sai_get_telemetry_int_sink_port_attribute_fn)(
-        _In_    sai_object_id_t telemetry_int_sink_port_id,
-        _In_    uint32_t attr_count,
-        _Inout_ sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_set_telemetry_int_sink_port_attribute_fn)(
-        _In_ sai_object_id_t telemetry_int_sink_port_id,
-        _In_ const sai_attribute_t *attr);
-
 typedef struct _sai_telemetry_api_t {
     sai_create_telemetry_queue_alert_fn           create_telemetry_queue_alert;
     sai_remove_telemetry_queue_alert_fn           remove_telemetry_queue_alert;
@@ -135,11 +112,6 @@ typedef struct _sai_telemetry_api_t {
     sai_remove_telemetry_int_session_fn           remove_telemetry_int_session;
     sai_get_telemetry_int_session_attribute_fn    get_telemetry_int_session_attribute;
     sai_set_telemetry_int_session_attribute_fn    set_telemetry_int_session_attribute;
-
-    sai_create_telemetry_int_sink_port_fn         create_telemetry_int_sink_port;
-    sai_remove_telemetry_int_sink_port_fn         remove_telemetry_int_sink_port;
-    sai_get_telemetry_int_sink_port_attribute_fn  get_telemetry_int_sink_port_attribute;
-    sai_set_telemetry_int_sink_port_attribute_fn  set_telemetry_int_sink_port_attribute;
 } sai_telemetry_api_t;
 
 /**
