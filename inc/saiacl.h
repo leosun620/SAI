@@ -1815,8 +1815,46 @@ typedef enum _sai_acl_entry_attr_t
     /** Custom range base value */
     SAI_ACL_ENTRY_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
-    /** Tunnel vni */
+    /**
+     * @brief Tunnel vni
+     *
+     * @type sai_acl_field_data_t sai_uint16_t
+     * @flags CREATE_AND_SET
+     */
+
     SAI_ACL_ENTRY_ATTR_FIELD_TUNNEL_VNI,
+
+    /**
+     * @brief Inner EtherType
+     *
+     * @type sai_acl_field_data_t sai_uint16_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_FIELD_INNER_ETHER_TYPE,
+
+    /**
+     * @brief Inner IP Protocol
+     *
+     * @type sai_acl_field_data_t sai_uint8_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_FIELD_INNER_IP_PROTOCOL,
+
+    /**
+     * @brief Inner L4 Src Port
+     *
+     * @type sai_acl_field_data_t sai_uint16_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_FIELD_INNER_L4_SRC_PORT,
+
+    /**
+     * @brief Inner L4 Dst Port
+     *
+     * @type sai_acl_field_data_t sai_uint16_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_FIELD_INNER_L4_DST_PORT,
 
     /** Telemetry watch (default: true) */
     SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_WATCH,
