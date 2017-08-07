@@ -34,40 +34,6 @@ typedef enum _sai_telemetry_int_session_attr_t {
     SAI_TELEMETRY_INT_SESSION_ATTR_INST_QUEUE_INFO,
 } sai_telemetry_int_session_attr_t;
 
-typedef sai_status_t (*sai_create_telemetry_fn)(
-        _Out_ sai_object_id_t *telemetry_obj,
-        _In_  uint32_t attr_count,
-        _In_  const sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_remove_telemetry_fn)(
-        _In_ sai_object_id_t telemetry_obj);
-
-typedef sai_status_t (*sai_get_telemetry_attribute_fn)(
-        _In_    sai_object_id_t telemetry_obj,
-        _In_    uint32_t attr_count,
-        _Inout_ sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_set_telemetry_attribute_fn)(
-        _In_  sai_object_id_t telemetry_obj,
-        _In_  const sai_attribute_t *attr);
-
-typedef sai_status_t (*sai_create_telemetry_watchlist_entry_fn)(
-        _Out_ sai_object_id_t *telemetry_watchlist_entry_id,
-        _In_  uint32_t attr_count,
-        _In_  const sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_remove_telemetry_watchlist_entry_fn)(
-        _In_ sai_object_id_t telemetry_watchlist_entry_id);
-
-typedef sai_status_t (*sai_get_telemetry_watchlist_entry_attribute_fn)(
-        _In_    sai_object_id_t telemetry_watchlist_entry_id,
-        _In_    uint32_t attr_count,
-        _Inout_ sai_attribute_t *attr_list);
-
-typedef sai_status_t (*sai_set_telemetry_watchlist_entry_attribute_fn)(
-        _In_  sai_object_id_t telemetry_watchlist_entry_id,
-        _In_  const sai_attribute_t *attr);
-
 typedef sai_status_t (*sai_create_telemetry_queue_alert_fn)(
         _Out_ sai_object_id_t *telemetry_queue_alert_id,
         _In_  uint32_t attr_count,
