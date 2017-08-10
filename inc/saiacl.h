@@ -228,12 +228,20 @@ typedef enum _sai_acl_action_type_t
     /** Set Do Not Learn unknown source MAC */
     SAI_ACL_ACTION_TYPE_SET_DO_NOT_LEARN,
 
-    /** Telemetry watch (default: true) */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_WATCH,
-    /** Telemetry Report every matched packet (default: false) */
+    /** Mirror on drop */
+    SAI_ACL_ACTION_TYPE_TELEMETRY_MOD_ENABLE,
+
+    /** Apply in-band network telemetry */
+    SAI_ACL_ACTION_TYPE_TELEMETRY_INT_ENABLE,
+
+    /** INT config session ID */
+    SAI_ACL_ACTION_TYPE_TELEMETRY_INT_SESSION,
+
+    /** Apply packet postcard telemetry */
+    SAI_ACL_ACTION_TYPE_TELEMETRY_POSTCARD_ENABLE,
+
+    /** Report every packet for the matched flow */
     SAI_ACL_ACTION_TYPE_TELEMETRY_REPORT_ALL,
-    /** Telemetry Set INT config session ID */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_SET_INT_SESSION_ID,
 
 } sai_acl_action_type_t;
 
@@ -388,21 +396,6 @@ typedef enum _sai_acl_table_group_member_attr_t
 
 } sai_acl_table_group_member_attr_t;
 
-/**
- * @brief Attribute data for SAI_ACL_TABLE_ATTR_TELEMETRY_TYPE
- */
-typedef enum _sai_acl_table_telemetry_type_t
-{
-    /** @brief Telemetry INT watchlist ACL table */
-    SAI_ACL_TABLE_TELEMETRY_TYPE_INT,
-
-    /** @brief Telemetry Postcard watchlist ACL table */
-    SAI_ACL_TABLE_TELEMETRY_TYPE_POSTCARD,
-
-    /** @brief Telemetry Mirror on Drop watchlist ACL table */
-    SAI_ACL_TABLE_TELEMETRY_TYPE_MOD,
-
-} sai_acl_table_telemetry_type_t;
 
 /**
  * @brief ACL User Defined Field Attribute ID Range
@@ -973,17 +966,6 @@ typedef enum _sai_acl_table_attr_t
      * @brief Custom range base value start
      */
     SAI_ACL_TABLE_ATTR_CUSTOM_RANGE_START = 0x10000000,
-
-    /**
-     * @brief Telemetry watchlist table
-     *
-     * Only needed when create a telemetry watchlist ACL table
-     *
-     * @type sai_acl_table_telemetry_type_t
-     * @flags CREATE_ONLY
-     * @default false
-     */
-    SAI_ACL_TABLE_ATTR_TELEMETRY,
 
     /**
      * @brief End of Custom range base
@@ -1816,7 +1798,7 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
     /**
-     * @brief Tunnel vni
+     * @brief Tunnel VNI
      *
      * @type sai_acl_field_data_t sai_uint16_t
      * @flags CREATE_AND_SET
@@ -1856,12 +1838,45 @@ typedef enum _sai_acl_entry_attr_t
      */
     SAI_ACL_ENTRY_ATTR_FIELD_INNER_L4_DST_PORT,
 
-    /** Telemetry watch (default: true) */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_WATCH,
-    /** Telemetry report every matched packet (default: false) */
+    /**
+     * @brief Mirror on drop
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_MOD_ENABLE,
+
+    /**
+     * @brief  Apply in-band network telemetry
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_ENABLE,
+
+    /**
+     * @brief NT config session ID
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_SESSION,
+
+    /**
+     * @brief Apply packet postcard telemetry
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_POSTCARD_ENABLE,
+
+    /**
+     * @brief Report every packet for the matched flow
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
     SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_REPORT_ALL,
-    /** Telemetry set INT config session ID */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_SET_INT_SESSION_ID,
 
     /** End of custom range base */
     SAI_ACL_ENTRY_ATTR_CUSTOM_RANGE_END
