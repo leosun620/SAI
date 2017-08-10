@@ -355,11 +355,6 @@ typedef struct _sai_acl_field_data_t
     } data;
 } sai_acl_field_data_t;
 
-typedef struct _sai_dscp_t {
-  sai_uint8_t value;
-  sai_uint8_t mask;
-} sai_dscp_t;
-
 /**
  * @brief Defines a single ACL action
  *
@@ -544,6 +539,22 @@ typedef enum _sai_fdb_entry_bridge_type_t
 } sai_fdb_entry_bridge_type_t;
 
 /**
+ * @brief Ternary field data.
+ */
+typedef struct _sai_ternary_field_t {
+    union {
+        sai_uint8_t u8;
+        sai_uint16_t u16;
+        sai_uint32_t u32;
+    } value;
+    union {
+        sai_uint8_t u8;
+        sai_uint16_t u16;
+        sai_uint32_t u32;
+    } mask;
+} sai_ternary_field_t;
+
+/**
  * @brief Data Type
  *
  * To use enum values as attribute value is sai_int32_t s32
@@ -581,7 +592,7 @@ typedef union {
     sai_qos_map_list_t qosmap;
     sai_tunnel_map_list_t tunnelmap;
     sai_acl_capability_t aclcapability;
-    sai_dscp_t dscp;
+    sai_ternary_t ternaryfield;
 
 } sai_attribute_value_t;
 

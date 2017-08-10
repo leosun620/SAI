@@ -1346,7 +1346,7 @@ typedef enum _sai_switch_attr_t
     /**
      * @brief Reserved DSCP value for INT over L4
      *
-     * @type sai_dscp_t
+     * @type sai_ternary_field_t
      * @flags CREATE_AND_SET
      */
     SAI_SWITCH_ATTR_TELEMETRY_INT_DSCP,

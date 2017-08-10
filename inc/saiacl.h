@@ -396,7 +396,6 @@ typedef enum _sai_acl_table_group_member_attr_t
 
 } sai_acl_table_group_member_attr_t;
 
-
 /**
  * @brief ACL User Defined Field Attribute ID Range
  */
