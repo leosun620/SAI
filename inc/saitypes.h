@@ -592,7 +592,7 @@ typedef union {
     sai_qos_map_list_t qosmap;
     sai_tunnel_map_list_t tunnelmap;
     sai_acl_capability_t aclcapability;
-    sai_ternary_t ternaryfield;
+    sai_ternary_field_t ternaryfield;
 
 } sai_attribute_value_t;
 
