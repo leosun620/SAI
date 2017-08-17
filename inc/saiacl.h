@@ -967,6 +967,51 @@ typedef enum _sai_acl_table_attr_t
     SAI_ACL_TABLE_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
     /**
+     * @brief Tunnel VNI
+     *
+     * @type bool
+     * @flags CREATE_ONLY
+     * @default false
+     */
+    SAI_ACL_TABLE_ATTR_FIELD_TUNNEL_VNI,
+
+    /**
+     * @brief Inner EtherType
+     *
+     * @type bool
+     * @flags CREATE_ONLY
+     * @default false
+     */
+    SAI_ACL_TABLE_ATTR_FIELD_INNER_ETHER_TYPE,
+
+    /**
+     * @brief Inner IP Protocol
+     *
+     * @type bool
+     * @flags CREATE_ONLY
+     * @default false
+     */
+    SAI_ACL_TABLE_ATTR_FIELD_INNER_IP_PROTOCOL,
+
+    /**
+     * @brief Inner L4 Src Port
+     *
+     * @type bool
+     * @flags CREATE_ONLY
+     * @default false
+     */
+    SAI_ACL_TABLE_ATTR_FIELD_INNER_L4_SRC_PORT,
+
+    /**
+     * @brief Inner L4 Dst Port
+     *
+     * @type bool
+     * @flags CREATE_ONLY
+     * @default false
+     */
+    SAI_ACL_TABLE_ATTR_FIELD_INNER_L4_DST_PORT,
+
+    /**
      * @brief End of Custom range base
      */
     SAI_ACL_TABLE_ATTR_CUSTOM_RANGE_END
