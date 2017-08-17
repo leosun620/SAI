@@ -228,16 +228,16 @@ typedef enum _sai_acl_action_type_t
     /** Set Do Not Learn unknown source MAC */
     SAI_ACL_ACTION_TYPE_SET_DO_NOT_LEARN,
 
-    /** Mirror on drop */
+    /** Enable mirror on drop */
     SAI_ACL_ACTION_TYPE_TELEMETRY_MOD_ENABLE,
 
-    /** Apply in-band network telemetry */
+    /** Enable in-band network telemetry */
     SAI_ACL_ACTION_TYPE_TELEMETRY_INT_ENABLE,
 
     /** INT config session ID */
     SAI_ACL_ACTION_TYPE_TELEMETRY_INT_SESSION,
 
-    /** Apply packet postcard telemetry */
+    /** Enable packet postcard */
     SAI_ACL_ACTION_TYPE_TELEMETRY_POSTCARD_ENABLE,
 
     /** Report every packet for the matched flow */
@@ -1799,10 +1799,9 @@ typedef enum _sai_acl_entry_attr_t
     /**
      * @brief Tunnel VNI
      *
-     * @type sai_acl_field_data_t sai_uint16_t
+     * @type sai_acl_field_data_t sai_uint32_t
      * @flags CREATE_AND_SET
      */
-
     SAI_ACL_ENTRY_ATTR_FIELD_TUNNEL_VNI,
 
     /**
@@ -1838,7 +1837,7 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_FIELD_INNER_L4_DST_PORT,
 
     /**
-     * @brief Mirror on drop
+     * @brief Enable mirror on drop
      *
      * @type bool
      * @flags CREATE_AND_SET
@@ -1846,7 +1845,7 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_MOD_ENABLE,
 
     /**
-     * @brief  Apply in-band network telemetry
+     * @brief Enable in-band network telemetry
      *
      * @type bool
      * @flags CREATE_AND_SET
@@ -1854,7 +1853,7 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_ENABLE,
 
     /**
-     * @brief NT config session ID
+     * @brief INT config session ID
      *
      * @type sai_uint8_t
      * @flags CREATE_AND_SET
@@ -1862,7 +1861,7 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_SESSION,
 
     /**
-     * @brief Apply packet postcard telemetry
+     * @brief Enable packet postcard
      *
      * @type bool
      * @flags CREATE_AND_SET

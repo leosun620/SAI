@@ -6,32 +6,98 @@
 
 /** Queue alert report trigger attributes */
 typedef enum _sai_telemetry_queue_alert_attr_t {
-    /** egress port */
+    /**
+     * @brief egress port
+     *
+     * @type sai_object_id_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     */
     SAI_TELEMETRY_QUEUE_ALERT_ATTR_EGRESS_PORT,
-    /** queue id */
+
+    /**
+     * @brief queue index
+     *
+     * @type sai_uint8_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     */
     SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_ID,
-    /** queue depth threshold */
+
+    /**
+     * @brief queue depth threshold
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_DEPTH_THRESHOLD,
-    /** queue latency threshold */
-    SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_LATENCY_THRESHOLD,
+
+    /**
+     * @brief queue latency threshold
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_TELEMETRY_QUEUE_ALERT_ATTR_QUEUE_LATENCY_THRESHOLD
+
 } sai_telemetry_queue_alert_attr_t;
 
 /** INT config session for endpoint switch */
 typedef enum _sai_telemetry_int_session_attr_t {
-    /** INT config session ID (sai_uint16_t) */
+    /**
+     * @brief INT config session ID
+     *
+     * @type sai_uint16_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_SESSION_ID,
-    /** INT max hop count (sai_uint8_t) */
+
+    /**
+     * @brief INT max hop count
+     *
+     * @type sai_uint8_t
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_MAX_HOP_COUNT,
-    /** Enable Switch ID in INT instruction (default: false) */
+
+    /**
+     * @brief add switch ID in INT instruction
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_INST_SWITCH_ID,
-    /** Enable Ingress and egress ports in INT instruction (default: false) */
+
+    /**
+     * @brief add ingress and egress ports in INT instruction
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_INST_SWITCH_PORTS,
-    /** Enable Timestamp at ingress in INT instruction (default: false) */
+
+    /**
+     * @brief add ingress Timestamp in INT instruction
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_INST_INGRESS_TIMESTAMP,
-    /** Enable Timestamp at egress in INT instruction (default: false) */
+
+    /**
+     * @brief add egress Timestamp in INT instruction
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
     SAI_TELEMETRY_INT_SESSION_ATTR_INST_EGRESS_TIMESTAMP,
-    /** Enable Queue ID and queue depth in INT instruction (default: false) */
-    SAI_TELEMETRY_INT_SESSION_ATTR_INST_QUEUE_INFO,
+
+    /**
+     * @brief add queue information in INT instruction
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     */
+    SAI_TELEMETRY_INT_SESSION_ATTR_INST_QUEUE_INFO
+
 } sai_telemetry_int_session_attr_t;
 
 typedef sai_status_t (*sai_create_telemetry_queue_alert_fn)(
