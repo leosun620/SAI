@@ -4,7 +4,9 @@
 
 #include <saitypes.h>
 
-/** Queue alert report trigger attributes */
+/**
+ * @brief Queue alert report trigger attributes
+ */
 typedef enum _sai_telemetry_queue_alert_attr_t {
     /**
      * @brief egress port
@@ -40,7 +42,9 @@ typedef enum _sai_telemetry_queue_alert_attr_t {
 
 } sai_telemetry_queue_alert_attr_t;
 
-/** INT config session for endpoint switch */
+/**
+ * @brief INT config session attributes
+ */
 typedef enum _sai_telemetry_int_session_attr_t {
     /**
      * @brief INT config session ID
