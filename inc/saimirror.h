@@ -248,6 +248,14 @@ typedef enum _sai_mirror_session_attr_t
     SAI_MIRROR_SESSION_ATTR_GRE_PROTOCOL_TYPE,
 
     /**
+     * @brief End of attributes
+     */
+    SAI_MIRROR_SESSION_ATTR_END,
+
+    /** Custom range base value */
+    SAI_MIRROR_SESSION_ATTR_CUSTOM_RANGE_START = 0x10000000,
+
+    /**
      * @brief ERSPAN Session ID
      *
      * @type sai_object_id_t
@@ -264,14 +272,6 @@ typedef enum _sai_mirror_session_attr_t
      * @condition SAI_MIRROR_SESSION_ATTR_TYPE == SAI_MIRROR_SESSION_TYPE_ENHANCED_REMOTE
      */
     SAI_MIRROR_SESSION_ATTR_CUSTOM_VR_ID,
-
-    /**
-     * @brief End of attributes
-     */
-    SAI_MIRROR_SESSION_ATTR_END,
-
-    /** Custom range base value */
-    SAI_MIRROR_SESSION_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
     /** End of custom range base */
     SAI_MIRROR_SESSION_ATTR_CUSTOM_RANGE_END
