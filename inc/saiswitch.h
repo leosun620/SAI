@@ -1257,30 +1257,22 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_ACL_STAGE_EGRESS,
 
     /**
-     * @brief End of attributes
-     */
-    SAI_SWITCH_ATTR_END,
-
-    /** Custom range base value */
-    SAI_SWITCH_ATTR_CUSTOM_RANGE_START = 0x10000000,
-
-    /**
-     * @brief INT endpoint
+     * @brief DTel INT endpoint
      *
      * @type bool
      * @flags CREATE_AND_SET
      * @default False
      */
-    SAI_SWITCH_ATTR_TELEMETRY_INT_EP_ENABLE,
+    SAI_SWITCH_ATTR_DTEL_INT_ENDPOINT_ENABLE,
 
     /**
-     * @brief INT transit
+     * @brief DTel INT transit
      *
      * @type bool
      * @flags CREATE_AND_SET
      * @default False
      */
-    SAI_SWITCH_ATTR_TELEMETRY_INT_TRANSIT_ENABLE,
+    SAI_SWITCH_ATTR_DTEL_INT_TRANSIT_ENABLE,
 
     /**
      * @brief Packet postcard
@@ -1289,59 +1281,59 @@ typedef enum _sai_switch_attr_t
      * @flags CREATE_AND_SET
      * @default False
      */
-    SAI_SWITCH_ATTR_TELEMETRY_POSTCARD_ENABLE,
+    SAI_SWITCH_ATTR_DTEL_POSTCARD_ENABLE,
 
     /**
-     * @brief Mirror on Drop
+     * @brief Drop Report
      *
      * @type bool
      * @flags CREATE_AND_SET
      * @default False
      */
-    SAI_SWITCH_ATTR_TELEMETRY_MIRROR_ON_DROP_ENABLE,
+    SAI_SWITCH_ATTR_DTEL_DROP_REPORT_ENABLE,
+
+    /**
+     * @brief Queue Report
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default False
+     */
+    SAI_SWITCH_ATTR_DTEL_QUEUE_REPORT_ENABLE,
 
     /**
      * @brief Globally unique switch ID
      *
      * @type sai_uint32_t
      * @flags CREATE_AND_SET
-     * @default 0
      */
-    SAI_SWITCH_ATTR_TELEMETRY_SWITCH_ID,
+    SAI_SWITCH_ATTR_DTEL_SWITCH_ID,
 
     /**
-     * @brief List of ERSPAN mirror sessions for sending telemetry reports
-     *
-     * @type sai_object_list_t
-     * @flags CREATE_AND_SET
-     */
-    SAI_SWITCH_ATTR_TELEMETRY_MIRROR_LIST,
-
-    /**
-     * @brief Telemetry flow state clear cycle
+     * @brief DTel flow state clear cycle
      *
      * @type sai_uint16_t
      * @flags CREATE_AND_SET
      * @default 0
      */
-    SAI_SWITCH_ATTR_TELEMETRY_FLOW_STATE_CLEAR_CYCLE,
+    SAI_SWITCH_ATTR_DTEL_FLOW_STATE_CLEAR_CYCLE,
 
     /**
      * @brief Latency sensitivity for flow state change detection
      *
      * @type sai_uint8_t
      * @flags CREATE_AND_SET
-     * @default 15
      */
-    SAI_SWITCH_ATTR_TELEMETRY_LATENCY_SENSITIVITY,
+    SAI_SWITCH_ATTR_DTEL_LATENCY_SENSITIVITY,
 
     /**
-     * @brief INT sink downstream ports
+     * @brief DTel sink ports
      *
      * @type sai_object_list_t
      * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_PORT
      */
-    SAI_SWITCH_ATTR_TELEMETRY_INT_SINK_PORT_LIST,
+    SAI_SWITCH_ATTR_DTEL_SINK_PORT_LIST,
 
     /**
      * @brief Reserved DSCP value for INT over L4
@@ -1349,7 +1341,15 @@ typedef enum _sai_switch_attr_t
      * @type sai_ternary_field_t
      * @flags CREATE_AND_SET
      */
-    SAI_SWITCH_ATTR_TELEMETRY_INT_DSCP,
+    SAI_SWITCH_ATTR_DTEL_INT_L4_DSCP,
+
+    /**
+     * @brief End of attributes
+     */
+    SAI_SWITCH_ATTR_END,
+
+    /** Custom range base value */
+    SAI_SWITCH_ATTR_CUSTOM_RANGE_START = 0x10000000,
 
     /** End of custom range base */
     SAI_SWITCH_ATTR_CUSTOM_RANGE_END

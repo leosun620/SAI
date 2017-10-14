@@ -128,6 +128,25 @@ typedef enum _sai_acl_ip_frag_t
 } sai_acl_ip_frag_t;
 
 /**
+ * @brief DTel flow operation
+ */
+typedef enum _sai_acl_dtel_flow_op_t
+{
+    /** No operation */
+    SAI_ACL_DTEL_FLOW_OP_NOP,
+
+    /** Packet Postcard */
+    SAI_ACL_DTEL_FLOW_OP_POSTCARD,
+
+    /** In-band Network Telemetry */
+    SAI_ACL_DTEL_FLOW_OP_INT,
+
+    /** In-band OAM */
+    SAI_ACL_DTEL_FLOW_OP_IOAM,
+
+} sai_acl_dtel_flow_op_t;
+
+/**
  * @brief ACL Action Type
  */
 typedef enum _sai_acl_action_type_t
@@ -228,20 +247,20 @@ typedef enum _sai_acl_action_type_t
     /** Set Do Not Learn unknown source MAC */
     SAI_ACL_ACTION_TYPE_SET_DO_NOT_LEARN,
 
-    /** Enable mirror on drop */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_MOD_ENABLE,
+    /** DTel flow operation */
+    SAI_ACL_ACTION_TYPE_DTEL_FLOW_OP,
 
-    /** Enable in-band network telemetry */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_INT_ENABLE,
+    /** INT configuration session */
+    SAI_ACL_ACTION_TYPE_DTEL_INT_SESSION,
 
-    /** INT config session ID */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_INT_SESSION,
+    /** Enable drop report */
+    SAI_ACL_ACTION_TYPE_DTEL_DROP_REPORT_ENABLE,
 
-    /** Enable packet postcard */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_POSTCARD_ENABLE,
+    /** DTel flow sample percent within matched flow space */
+    SAI_ACL_ACTION_TYPE_DTEL_FLOW_SAMPLE_PERCENT,
 
     /** Report every packet for the matched flow */
-    SAI_ACL_ACTION_TYPE_TELEMETRY_REPORT_ALL,
+    SAI_ACL_ACTION_TYPE_DTEL_REPORT_ALL_PACKETS,
 
 } sai_acl_action_type_t;
 
@@ -1882,44 +1901,49 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_FIELD_INNER_L4_DST_PORT,
 
     /**
-     * @brief Enable mirror on drop
+     * @brief DTel flow operation
+     *
+     * @type sai_acl_dtel_flow_op_t
+     * @flags CREATE_AND_SET
+     * @default SAI_ACL_DTEL_FLOW_OP_NOP
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_DTEL_FLOW_OP,
+
+    /**
+     * @brief INT session ID
+     *
+     * @type sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_DTEL_INT_SESSION
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_DTEL_INT_SESSION,
+
+    /**
+     * @brief Enable drop report
      *
      * @type bool
      * @flags CREATE_AND_SET
+     * @default False
      */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_MOD_ENABLE,
+    SAI_ACL_ENTRY_ATTR_ACTION_DTEL_DROP_REPORT_ENABLE,
 
     /**
-     * @brief Enable in-band network telemetry
-     *
-     * @type bool
-     * @flags CREATE_AND_SET
-     */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_ENABLE,
-
-    /**
-     * @brief INT config session ID
+     * @brief Telemetry flow sample percent within matched flow space
      *
      * @type sai_uint8_t
      * @flags CREATE_AND_SET
+     * @default 100
      */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_INT_SESSION,
-
-    /**
-     * @brief Enable packet postcard
-     *
-     * @type bool
-     * @flags CREATE_AND_SET
-     */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_POSTCARD_ENABLE,
+    SAI_ACL_ENTRY_ATTR_ACTION_DTEL_FLOW_SAMPLE_PERCENT,
 
     /**
      * @brief Report every packet for the matched flow
      *
      * @type bool
      * @flags CREATE_AND_SET
+     * @default False
      */
-    SAI_ACL_ENTRY_ATTR_ACTION_TELEMETRY_REPORT_ALL,
+    SAI_ACL_ENTRY_ATTR_ACTION_DTEL_REPORT_ALL_PACKETS,
 
     /** End of custom range base */
     SAI_ACL_ENTRY_ATTR_CUSTOM_RANGE_END
