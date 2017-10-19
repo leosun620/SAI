@@ -212,6 +212,8 @@ typedef enum _sai_dtel_event_type_t
     /** Report triggered by packet drop */
     SAI_DTEL_EVENT_TYPE_DROP_REPORT,
 
+    SAI_DTEL_EVENT_TYPE_MAX
+
 } sai_dtel_event_type_t;
 
 /**
