@@ -218,8 +218,11 @@ typedef enum _sai_object_type_t {
     SAI_OBJECT_TYPE_BRIDGE                   = 57,
     SAI_OBJECT_TYPE_BRIDGE_PORT              = 58,
     SAI_OBJECT_TYPE_TUNNEL_MAP_ENTRY         = 59,
-    SAI_OBJECT_TYPE_TELEMETRY_QUEUE_ALERT    = 60,
-    SAI_OBJECT_TYPE_MAX                      = 61,
+    SAI_OBJECT_TYPE_DTEL_QUEUE_REPORT        = 60,
+    SAI_OBJECT_TYPE_DTEL_INT_SESSION         = 61,
+    SAI_OBJECT_TYPE_DTEL_REPORT_SESSION      = 62,
+    SAI_OBJECT_TYPE_DTEL_EVENT               = 63,
+    SAI_OBJECT_TYPE_MAX                      = 64,
 } sai_object_type_t;
 
 typedef struct _sai_u8_list_t {
@@ -294,6 +297,11 @@ typedef struct _sai_ip_address_t {
         sai_ip6_t ip6;
     } addr;
 } sai_ip_address_t;
+
+typedef struct  _sai_ip_address_list_t {
+    uint32_t count;
+    sai_ip_address_t *list;
+} sai_ip_address_list_t;
 
 typedef struct _sai_ip_prefix_t {
     sai_ip_addr_family_t addr_family;
@@ -587,6 +595,7 @@ typedef union {
     sai_u32_range_t u32range;
     sai_s32_range_t s32range;
     sai_vlan_list_t vlanlist;
+    sai_ip_address_list_t ipaddrlist;
     sai_acl_field_data_t aclfield;
     sai_acl_action_data_t aclaction;
     sai_qos_map_list_t qosmap;
